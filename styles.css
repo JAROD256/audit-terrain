@@ -53,24 +53,26 @@ html, body {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.05); opacity: .85; }
 }
-.splash-bar {
-  width: 160px;
-  height: 4px;
-  background: var(--surface2);
-  border-radius: 2px;
-  overflow: hidden;
+.splash-start-btn {
+  padding: 18px 64px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: inherit;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(46, 204, 113, .4);
+  transition: transform .15s;
+  min-height: 60px;
+  animation: splashBtnAppear 1s ease .3s both;
 }
-.splash-bar-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
-  border-radius: 2px;
-  animation: splashLoad 2s ease-out forwards;
-}
-@keyframes splashLoad {
-  0% { width: 0%; }
-  60% { width: 80%; }
-  100% { width: 100%; }
+.splash-start-btn:active { transform: scale(.95); }
+@keyframes splashBtnAppear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ═══════ SCREENS ═══════ */

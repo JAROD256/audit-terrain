@@ -578,7 +578,7 @@ const App = (() => {
   }
 
   // ═══════ SPLASH SCREEN ═══════
-  function hideSplash() {
+  function dismissSplash() {
     const splash = $('splash');
     if (splash) {
       splash.classList.add('hide');
@@ -587,10 +587,7 @@ const App = (() => {
   }
 
   // ─── Boot ───
-  document.addEventListener('DOMContentLoaded', () => {
-    init();
-    setTimeout(hideSplash, 2200);
-  });
+  document.addEventListener('DOMContentLoaded', init);
 
   // ─── Public API ───
   return {
@@ -600,6 +597,6 @@ const App = (() => {
     saveAudit, saveNote,
     switchTab, validateEntry, deleteEntry,
     exportJSON, printReport,
-    dismissAlarm
+    dismissAlarm, dismissSplash
   };
 })();
