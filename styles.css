@@ -44,8 +44,8 @@ html, body {
   pointer-events: none;
 }
 .splash-logo {
-  width: 180px;
-  height: 180px;
+  width: 280px;
+  height: 280px;
   object-fit: contain;
   animation: splashPulse 1.5s ease-in-out infinite;
 }
