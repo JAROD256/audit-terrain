@@ -577,8 +577,20 @@ const App = (() => {
     });
   }
 
+  // ═══════ SPLASH SCREEN ═══════
+  function hideSplash() {
+    const splash = $('splash');
+    if (splash) {
+      splash.classList.add('hide');
+      setTimeout(() => splash.remove(), 600);
+    }
+  }
+
   // ─── Boot ───
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
+    setTimeout(hideSplash, 2200);
+  });
 
   // ─── Public API ───
   return {
