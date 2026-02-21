@@ -1,0 +1,4 @@
+#Sat Feb 21 23:12:41 CET 2026
+base.0=C\:\\Fichiers\\Note\\apk-build\\app\\build\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

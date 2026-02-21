@@ -318,6 +318,28 @@ html, body {
 .field-input:focus { border-color: var(--red); }
 .field-input--big { flex: 1; min-height: 150px; }
 
+.field-with-mic { position: relative; display: flex; flex-direction: column; }
+.field-with-mic .field-input { padding-right: 56px; }
+.mic-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .2s;
+}
+.mic-btn svg { width: 24px; height: 24px; }
+.mic-btn.recording { background: var(--red); color: #fff; animation: micPulse 1s ease infinite; }
+@keyframes micPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,.4); } 50% { box-shadow: 0 0 0 10px rgba(233,69,96,0); } }
+
 .preview-thumb {
   width: 100%;
   max-height: 200px;

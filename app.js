@@ -15,6 +15,9 @@ const App = (() => {
   let arrowStart = null;
   let currentTab = 'pending';
   let alarmFired = false;
+  let recognition = null;
+  let activeRecField = null;
+  let activeRecBtn = null;
 
   // ─── DOM refs (lazy) ───
   const $ = (id) => document.getElementById(id);
@@ -468,6 +471,67 @@ const App = (() => {
     renderReport().then(() => window.print());
   }
 
+  // ═══════ DICTÉE VOCALE ═══════
+  function toggleDictation(fieldId, btnId) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      toast('Dictée vocale non supportée sur ce navigateur');
+      return;
+    }
+
+    if (recognition && activeRecField === fieldId) {
+      recognition.stop();
+      return;
+    }
+
+    if (recognition) recognition.stop();
+
+    recognition = new SpeechRecognition();
+    recognition.lang = 'fr-FR';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    activeRecField = fieldId;
+    activeRecBtn = btnId;
+
+    const field = $(fieldId);
+    const btn = $(btnId);
+    const textBefore = field.value;
+    const separator = textBefore && !textBefore.endsWith(' ') ? ' ' : '';
+
+    btn.classList.add('recording');
+    toast('Parlez maintenant...');
+
+    recognition.onresult = (e) => {
+      let interim = '';
+      let final = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const transcript = e.results[i][0].transcript;
+        if (e.results[i].isFinal) {
+          final += transcript;
+        } else {
+          interim += transcript;
+        }
+      }
+      field.value = textBefore + separator + final + interim;
+    };
+
+    recognition.onend = () => {
+      btn.classList.remove('recording');
+      recognition = null;
+      activeRecField = null;
+      activeRecBtn = null;
+    };
+
+    recognition.onerror = (e) => {
+      if (e.error !== 'aborted') toast('Erreur micro : ' + e.error);
+      btn.classList.remove('recording');
+      recognition = null;
+      activeRecField = null;
+    };
+
+    recognition.start();
+  }
+
   // ═══════ ALARM (14h30) ═══════
   function startAlarmCheck() {
     checkAlarm();
@@ -597,6 +661,6 @@ const App = (() => {
     saveAudit, saveNote,
     switchTab, validateEntry, deleteEntry,
     exportJSON, printReport,
-    dismissAlarm, dismissSplash
+    dismissAlarm, dismissSplash, toggleDictation
   };
 })();
