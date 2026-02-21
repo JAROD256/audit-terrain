@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   AUDIT TERRAIN — Application principale
+   OPTINOTE — Application principale
    ═══════════════════════════════════════════════ */
 
 const App = (() => {
@@ -33,7 +33,7 @@ const App = (() => {
   // ═══════ IndexedDB ═══════
   function openDB() {
     return new Promise((resolve, reject) => {
-      const req = indexedDB.open('AuditTerrainDB', 1);
+      const req = indexedDB.open('OptiNoteDB', 1);
       req.onupgradeneeded = (e) => {
         const store = e.target.result;
         if (!store.objectStoreNames.contains('entries')) {
@@ -458,7 +458,7 @@ const App = (() => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `rapport-audit-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `rapport-optinote-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
     toast('JSON exporté ✓');
@@ -513,7 +513,7 @@ const App = (() => {
 
   function sendNotification(count) {
     if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('Rappel Audit – 14h30', {
+      new Notification('Rappel OptiNote – 14h30', {
         body: `Vous avez ${count} note(s) non validée(s) à traiter.`,
         icon: 'icons/icon-192.png',
         vibrate: [200, 100, 200]

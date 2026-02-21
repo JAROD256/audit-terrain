@@ -1,7 +1,7 @@
 {
-  "name": "Audit Terrain",
-  "short_name": "Audit",
-  "description": "Application d'audit terrain et prise de notes rapides",
+  "name": "OptiNote",
+  "short_name": "OptiNote",
+  "description": "OptiNote — Audit terrain et prise de notes rapides",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

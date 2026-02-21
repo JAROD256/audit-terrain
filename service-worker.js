@@ -1,4 +1,4 @@
-const CACHE_NAME = 'audit-terrain-v1';
+const CACHE_NAME = 'optinote-v1';
 const ASSETS = [
   './',
   './index.html',
